@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC_Blog_TeamWork.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,21 +11,10 @@ namespace MVC_Blog_TeamWork.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var db = new ApplicationDbContext();
+            var post = db.Posts.OrderByDescending(p => p.Date).Take(3);
+            return View(post.ToList());
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
