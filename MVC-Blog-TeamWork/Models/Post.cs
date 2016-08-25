@@ -7,7 +7,13 @@ using System.Web;
 namespace MVC_Blog_TeamWork.Models
 {
     public class Post
+      
     {
+        public Post()
+        {
+            this.Date = DateTime.Now;
+        }
+
         [Key]
         public int Id { get; set; }
 
