@@ -22,6 +22,7 @@ namespace MVC_Blog_TeamWork.Models
         public string Title { get; set; }
 
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Body { get; set; }
 
         [Required]

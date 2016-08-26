@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Blog_TeamWork.Models;
+using System.Data.Entity;
 
 namespace MVC_Blog_TeamWork.Controllers
 {
+    [ValidateInput(false)]
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,7 +19,8 @@ namespace MVC_Blog_TeamWork.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            var postWithAuthors = db.Posts.Include(p => p.Author).ToList();
+            return View(postWithAuthors);
         }
 
         // GET: Posts/Details/5
@@ -36,6 +39,7 @@ namespace MVC_Blog_TeamWork.Controllers
         }
 
         // GET: Posts/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -45,11 +49,14 @@ namespace MVC_Blog_TeamWork.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Body,Date")] Post post)
+      
+        public ActionResult Create([Bind(Include = "Id,Title,Body")] Post post)
         {
             if (ModelState.IsValid)
             {
+                post.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,6 +66,7 @@ namespace MVC_Blog_TeamWork.Controllers
         }
 
         // GET: Posts/Edit/5
+        [Authorize(Roles="Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +98,7 @@ namespace MVC_Blog_TeamWork.Controllers
         }
 
         // GET: Posts/Delete/5
+           [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
