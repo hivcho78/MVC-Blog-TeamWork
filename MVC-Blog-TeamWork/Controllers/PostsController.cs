@@ -66,7 +66,7 @@ namespace MVC_Blog_TeamWork.Controllers
         }
 
         // GET: Posts/Edit/5
-        [Authorize(Roles="Administrator")]
+        [Authorize(Roles="Administrators")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +86,7 @@ namespace MVC_Blog_TeamWork.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit([Bind(Include = "Id,Title,Body,Date")] Post post)
         {
             if (ModelState.IsValid)
@@ -98,7 +99,7 @@ namespace MVC_Blog_TeamWork.Controllers
         }
 
         // GET: Posts/Delete/5
-           [Authorize(Roles = "Administrator")]
+           [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,6 +115,7 @@ namespace MVC_Blog_TeamWork.Controllers
         }
 
         // POST: Posts/Delete/5
+        [Authorize(Roles = "Administrators")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

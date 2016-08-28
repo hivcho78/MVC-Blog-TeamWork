@@ -28,7 +28,6 @@ namespace MVC_Blog_TeamWork.Models
         [Required]
         public DateTime Date { get; set; }
 
-
         public ApplicationUser Author { get; set; }
     }
 }
