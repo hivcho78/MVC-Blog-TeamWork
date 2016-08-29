@@ -13,7 +13,7 @@ namespace MVC_Blog_TeamWork.Classes
             {
                 return text;
             }
-            var shortText = text.Substring(0, maxLength) + "...";
+            var shortText = text.Substring(0, maxLength-3) + "...";
             return shortText;
         }
     }
