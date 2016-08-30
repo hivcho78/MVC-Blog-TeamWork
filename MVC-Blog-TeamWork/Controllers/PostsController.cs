@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC_Blog_TeamWork.Models;
+using MVC_Blog_TeamWork.Extensions;
 using System.Data.Entity;
 
 namespace MVC_Blog_TeamWork.Controllers
@@ -51,7 +52,7 @@ namespace MVC_Blog_TeamWork.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-      
+
         public ActionResult Create([Bind(Include = "Id,Title,Body")] Post post)
         {
             if (ModelState.IsValid)
@@ -59,6 +60,7 @@ namespace MVC_Blog_TeamWork.Controllers
                 post.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 db.Posts.Add(post);
                 db.SaveChanges();
+                this.AddNotification("Post created", NotificationType.INFO);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +68,7 @@ namespace MVC_Blog_TeamWork.Controllers
         }
 
         // GET: Posts/Edit/5
-        [Authorize(Roles="Administrators")]
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,13 +95,14 @@ namespace MVC_Blog_TeamWork.Controllers
             {
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
+                this.AddNotification("Post edited", NotificationType.INFO);
                 return RedirectToAction("Index");
             }
             return View(post);
         }
 
         // GET: Posts/Delete/5
-           [Authorize(Roles = "Administrators")]
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,6 +126,7 @@ namespace MVC_Blog_TeamWork.Controllers
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
+            this.AddNotification("Post delted", NotificationType.INFO);
             return RedirectToAction("Index");
         }
 
