@@ -75,14 +75,14 @@ namespace MVC_Blog_TeamWork.Models
 
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [StringLength(100, ErrorMessage = "Това{0}трябва да е поне {2} символа дълго.", MinimumLength = 1)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Паролата и потвърждението не си съвпадат.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -94,14 +94,14 @@ namespace MVC_Blog_TeamWork.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [StringLength(100, ErrorMessage = "Това {0} трябва да е поне {2} символа дълго.", MinimumLength = 1)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Паролата и потвърждението не си съвпадат.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

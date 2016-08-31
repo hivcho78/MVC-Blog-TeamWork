@@ -60,7 +60,7 @@ namespace MVC_Blog_TeamWork.Controllers
                 post.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 db.Posts.Add(post);
                 db.SaveChanges();
-                this.AddNotification("Post created", NotificationType.INFO);
+                this.AddNotification("Постът е създаден", NotificationType.INFO);
                 return RedirectToAction("Index");
             }
 
@@ -95,7 +95,7 @@ namespace MVC_Blog_TeamWork.Controllers
             {
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                this.AddNotification("Post edited", NotificationType.INFO);
+                this.AddNotification("Постът е редактиран", NotificationType.INFO);
                 return RedirectToAction("Index");
             }
             return View(post);
@@ -126,7 +126,7 @@ namespace MVC_Blog_TeamWork.Controllers
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
-            this.AddNotification("Post delted", NotificationType.INFO);
+            this.AddNotification("Постът е изтрит", NotificationType.INFO);
             return RedirectToAction("Index");
         }
 

@@ -55,12 +55,12 @@ namespace MVC_Blog_TeamWork.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Вашата парола беше сменена."
+                : message == ManageMessageId.SetPasswordSuccess ? "Вашата парола е сетната."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Вашите два начина на идентификация бяха сетнати."
+                : message == ManageMessageId.Error ? "Има грешка."
+                : message == ManageMessageId.AddPhoneSuccess ? "Вашия телефонен номер бе добавен."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Вашия телефонен номер е вече изтрит."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -123,7 +123,7 @@ namespace MVC_Blog_TeamWork.Controllers
                 var message = new IdentityMessage
                 {
                     Destination = model.Number,
-                    Body = "Your security code is: " + code
+                    Body = "Вашия секюрити код е: " + code
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
@@ -279,8 +279,8 @@ namespace MVC_Blog_TeamWork.Controllers
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
+                message == ManageMessageId.RemoveLoginSuccess ? "Вашето външно влизане е изтрито."
+                : message == ManageMessageId.Error ? "Забелязана е грешка."
                 : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)

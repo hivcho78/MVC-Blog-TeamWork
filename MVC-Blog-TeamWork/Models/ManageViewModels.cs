@@ -28,14 +28,14 @@ namespace MVC_Blog_TeamWork.Models
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Това {0} трябва да е поне {2} символа.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "Новата парола и потвърждението не си съвпадат.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -54,7 +54,7 @@ namespace MVC_Blog_TeamWork.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "Новата парола и потвърждението не си съвпадат.")]
         public string ConfirmPassword { get; set; }
     }
 
